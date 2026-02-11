@@ -234,7 +234,8 @@ to{opacity:1;}
 
 <body>
 
-<audio id="music" src="amorcito.mp3"></audio>
+<audio id="music" src="cancion.mp3" loop></audio>
+
 
 <!-- SOBRE -->
 <div class="envelope" id="envelope">
@@ -323,6 +324,8 @@ const randomY=Math.random()*80;
 noBtn.style.left=randomX+"px";
 noBtn.style.top=randomY+"px";
 });
+music.volume = 0.3;
+music.play().catch(()=>{});
 
 </script>
 
