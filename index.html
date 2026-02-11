@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Quicksand',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff9ecf,#ffc1da,#ffe6f2);
+overflow:hidden;
+position:relative;
+}
+
+/* CORAZONES FLOTANDO */
+.heart{
+position:absolute;
+font-size:20px;
+animation: floatUp linear infinite;
+opacity:0.6;
+pointer-events:none;
+}
+
+@keyframes floatUp{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+
+/* ================= SOBRE MEGA PRO ================= */
+
+.envelope{
+position:relative;
+width:420px;
+height:260px;
+background:#ff4d88;
+border-radius:15px;
+box-shadow:0 30px 70px rgba(0,0,0,0.35);
+cursor:pointer;
+transition:0.4s;
+z-index:2;
+overflow:hidden;
+}
+
+.envelope:hover{
+transform:scale(1.05);
+}
+
+/* Parte inferior del sobre */
+.envelope::after{
+content:"";
+position:absolute;
+bottom:0;
+left:0;
+width:0;
+height:0;
+border-left:210px solid transparent;
+border-right:210px solid transparent;
+border-bottom:130px solid #ff6fa5;
+z-index:1;
+}
+
+/* Tapa */
+.envelope-flap{
+position:absolute;
+top:0;
+left:0;
+width:0;
+height:0;
+border-left:210px solid transparent;
+border-right:210px solid transparent;
+border-top:140px solid #ff85b3;
+z-index:2;
+transition:transform 0.8s ease;
+transform-origin:top;
+}
+
+.envelope.open .envelope-flap{
+transform:rotateX(180deg);
+}
+
+/* Texto */
+.envelope-text{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+text-align:center;
+padding:20px;
+z-index:3;
+}
+
+.envelope h2{
+margin-bottom:10px;
+font-size:20px;
+letter-spacing:1px;
+}
+.envelope.hidden{
+display:none;
+}
+
+/* ================= PROPUESTA ================= */
+
+.proposal{
+position:fixed;
+inset:0;
+background:rgba(255,182,193,0.95);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+opacity:0;
+pointer-events:none;
+transition:0.6s;
+}
+
+.proposal.active{
+opacity:1;
+pointer-events:all;
+}
+
+.proposal-card{
+background:white;
+padding:60px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 30px 80px rgba(0,0,0,0.4);
+animation: pop 0.7s ease;
+max-width:520px;
+position:relative;
+}
+
+@keyframes pop{
+0%{transform:scale(0);}
+100%{transform:scale(1);}
+}
+
+.proposal-card h1{
+font-size:32px;
+color:#ff2e6e;
+margin-bottom:20px;
+}
+
+.custom-note{
+margin-bottom:30px;
+font-size:18px;
+color:#444;
+line-height:1.5;
+}
+
+/* BOTONES */
+
+.buttons{
+position:relative;
+height:100px;
+}
+
+button{
+padding:12px 35px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+position:absolute;
+transition:0.3s;
+}
+
+#yesBtn{
+background:#ff2e6e;
+color:white;
+left:20%;
+}
+
+#yesBtn:hover{
+transform:scale(1.15);
+}
+
+#noBtn{
+background:#999;
+color:white;
+left:55%;
+}
+
+/* ================= MENSAJE FINAL ================= */
+
+.finalMessage{
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#ff4d88,#ff85b3);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+font-size:28px;
+text-align:center;
+opacity:0;
+pointer-events:none;
+transition:0.6s;
+z-index:10;
+padding:30px;
+}
+
+.finalMessage.active{
+opacity:1;
+pointer-events:all;
+animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="amorcito.mp3"></audio>
+
+<!-- SOBRE -->
+<div class="envelope" id="envelope">
+<div class="envelope-flap"></div>
+<div class="envelope-text">
+<h2>💌 Para mi amorcito hermoso 💌</h2>
+<p>Presiona la carta...</p>
+</div>
+</div>
+
+<!-- PROPUESTA -->
+<div class="proposal" id="proposal">
+<div class="proposal-card">
+<h1>¿Quieres ser mi San Valentín? 💘</h1>
+
+<p class="custom-note">
+Desde que llegaste a mi vida mi lume todo es más bonito.  
+Quiero seguir creando momentos contigo, riendo, soñando y viviendo cosas hermosas los 2 juntitos por siempre ❤️  
+¿Me harías el honor de ser mi San Valentín mi corazon? igual no puedes poner no jejeje😼
+</p>
+
+<div class="buttons">
+<button id="yesBtn">SI 💖</button>
+<button id="noBtn">NO 😢</button>
+</div>
+
+</div>
+</div>
+
+<!-- MENSAJE FINAL -->
+<div class="finalMessage" id="finalMessage">
+💖 obvio que dirias que si 💖  
+<br><br>
+go comer rico y monopolio  y 😉❤️
+</div>
+
+
+<script>
+
+const envelope = document.getElementById("envelope");
+const proposal = document.getElementById("proposal");
+const music = document.getElementById("music");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const finalMessage = document.getElementById("finalMessage");
+
+/* FORZAR ESTADO LIMPIO AL RECARGAR */
+window.addEventListener("load", () => {
+proposal.classList.remove("active");
+finalMessage.classList.remove("active");
+envelope.classList.remove("hidden");
+envelope.classList.remove("open");
+});
+
+/* GENERAR CORAZONES */
+for(let i=0;i<30;i++){
+let heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(5+Math.random()*5)+"s";
+document.body.appendChild(heart);
+}
+
+/* ABRIR SOBRE */
+envelope.addEventListener("click",()=>{
+envelope.classList.add("open");
+
+setTimeout(()=>{
+proposal.classList.add("active");
+envelope.classList.add("hidden"); // ahora se oculta correctamente
+music.play().catch(()=>{});
+},800);
+});
+
+/* BOTON SI */
+yesBtn.addEventListener("click",()=>{
+proposal.classList.remove("active");
+finalMessage.classList.add("active");
+});
+
+/* BOTON NO ESCAPA */
+noBtn.addEventListener("mouseenter",()=>{
+const randomX=Math.random()*300;
+const randomY=Math.random()*80;
+noBtn.style.left=randomX+"px";
+noBtn.style.top=randomY+"px";
+});
+
+</script>
+
+
+</body>
+</html>
